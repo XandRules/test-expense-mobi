@@ -22,7 +22,7 @@ async readFile(req,res){
 
   return res.json({
     result : 
-    results.nome[1]
+    results.nome
   })
 
 }
