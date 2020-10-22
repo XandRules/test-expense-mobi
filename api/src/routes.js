@@ -8,7 +8,7 @@ const routes = new Router();
 
 const upload = multer(multerConfig);
 
-routes.get('/list', XlsxController.readFile)
+routes.get('/list/:filename', XlsxController.readFile)
 
 routes.post("/file", upload.single("file"), FileController.store);
 

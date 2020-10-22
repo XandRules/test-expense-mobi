@@ -1,16 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import DownloadXlsx from './components/download_xlsx/DownloadXlsx';
-import ShowXlsx from './components/show_xlsx/ShowXlsx';
-import UploadXlsx from './components/upload_xlsx/UploadXlsx';
+
+import 'materialize-css/dist/css/materialize.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <UploadXlsx/>
-    <DownloadXlsx/>
-    <ShowXlsx/>
   </React.StrictMode>,
   document.getElementById('root')
 );

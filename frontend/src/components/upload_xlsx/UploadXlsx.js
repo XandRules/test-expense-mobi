@@ -5,12 +5,15 @@ import React,{Component} from 'react';
 class UploadXlsx extends Component { 
    
     state = { 
-        selectedFile: null
+        selectedFile: null,
+        fileName : null,
     }; 
      
     onFileChange = event => {      
       // Atualiza o estado
       this.setState({ selectedFile: event.target.files[0] }); 
+
+      console.log(event.target.files[0]);
      
     }; 
      
@@ -32,7 +35,11 @@ class UploadXlsx extends Component {
       // Envia o arquivo para a Api
       axios.post("http://localhost:3333/file", formData).then(response =>{
         console.log(response.data);
+        this.fileName = response.data.path;
+        this.setState({fileName: this.fileName});
       }); 
+
+      
     }; 
      
     render() { 
@@ -44,6 +51,7 @@ class UploadXlsx extends Component {
                 <button onClick={this.onFileUpload}> 
                   Enviar! 
                 </button> 
+                <input value={this.fileName}></input>
             </div> 
          
         </div> 

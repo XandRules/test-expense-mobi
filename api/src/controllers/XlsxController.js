@@ -6,7 +6,7 @@ class XlsxController {
 async readFile(req,res){
 
   // Parse a buffer
-  const fileBuffer = xlsx.parse(fs.readFileSync(`./tmp/file.xlsx`));
+  const fileBuffer = xlsx.parse(fs.readFileSync(`./tmp/uploads/${req.params.filename}`));
 
 
   let results = {};
