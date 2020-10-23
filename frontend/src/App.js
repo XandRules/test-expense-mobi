@@ -41,8 +41,8 @@ export default class App extends Component {
 
         // Consulta pelo nome do arquivo enviado.
         axios.get(`http://localhost:3333/list/${this.fileName}`).then(response =>{
-          //console.log(response.data.result);
-          this.result = response.data.result;
+         // console.log(response.data);
+          this.result = response.data;
           this.setState({result : this.result});
         });
       });     
@@ -78,7 +78,7 @@ export default class App extends Component {
             </div>
             <div className="col s12 push-7">
             <ShowXlsx
-              result={result}
+              result={this.result}
             ></ShowXlsx>              
             </div>
           </div>

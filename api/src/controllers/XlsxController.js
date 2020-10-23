@@ -5,24 +5,33 @@ class XlsxController {
 
 async readFile(req,res){
 
-  // Parse a buffer
   const fileBuffer = xlsx.parse(fs.readFileSync(`./tmp/uploads/${req.params.filename}`));
 
+  let results =  {
+    name: [],
+    lastName: [],
+    cpf : []
+  }
 
-  let results = {};
+  const result = fileBuffer.map(element => {
+    let len = 0;
+    for (const key in element.data) {
 
-  const result = fileBuffer.forEach(element => {
-    console.log(element.data)
+      len = element.data[key].length;
 
-    results.nome = element.data;
+      results.name.push(element.data[key][0])     
+      results.lastName.push(element.data[key][1]) 
+      results.cpf.push(element.data[key][2])      
 
+    }
   });
 
-  console.log('rs' , results)
+  const { name , lastName, cpf } = results;
 
   return res.json({
-    result : 
-    results.nome
+    name,
+    lastName,
+    cpf
   })
 
 }

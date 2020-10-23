@@ -1,18 +1,27 @@
 import React from 'react';
+import Table from './Table';
 
-var resp = new Array();// [["Alexandre","Ribeiro","115.853.176-16"],["Alexandre","Ribeiro","115.853.176-16"]];
+var r = [{
+  "name": [
+    ""
+  ],
+  "lastName": [
+    "",
+  ],
+  "cpf": [
+    ""
+  ]
+}]
 
-const ShowXlsx = ({result}) =>{
+export default function ShowXlsx ({result}){
   
-  console.log('resultado ' , result)
+  if(result)
+  {
+    r = []
+    r.push(result);
+  } 
 
-  
-  resp.push(result);
-    resp.map(i =>{
-      console.log(i)
-    })
-    
-
+ 
   return (
     <div className="uk-container">
         <table className="uk-table uk-table-divider">
@@ -23,15 +32,13 @@ const ShowXlsx = ({result}) =>{
                   <th>CPF</th>
               </tr>
           </thead>
-          <tbody>
-           
-             {resp.map(i =>{
-               return <tr>
-                <td>{i[0]}</td>
-                <td>{i[1]}</td>
-                <td>{i[2]}</td>
-              </tr>
-             })}           
+          <tbody>     
+            {
+              r.map(item =>{
+                return <Table name={item.name} lastName={item.lastName} cpf={item.cpf} />
+               
+              })
+            }
           
           </tbody>
       </table>
@@ -39,5 +46,3 @@ const ShowXlsx = ({result}) =>{
   )
 
 }
-
-export default ShowXlsx;
