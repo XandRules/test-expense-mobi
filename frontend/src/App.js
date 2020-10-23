@@ -9,6 +9,7 @@ export default class App extends Component {
     state = { 
         selectedFile: null,
         fileName : null,
+        result : null,
     }; 
     
     onFileChange = event => {      
@@ -31,21 +32,28 @@ export default class App extends Component {
         this.state.selectedFile, 
         this.state.selectedFile.name 
       ); 
-    
-      console.log(this.state.selectedFile); 
-    
+
       // Envia o arquivo para a Api
       axios.post("http://localhost:3333/file", formData).then(response =>{
-        console.log(response.data);
+       // console.log(response.data);
         this.fileName = response.data.path;
         this.setState({fileName: this.fileName});
-      });       
-    }; 
-  
+
+        // Consulta pelo nome do arquivo enviado.
+        axios.get(`http://localhost:3333/list/${this.fileName}`).then(response =>{
+          //console.log(response.data.result);
+          this.result = response.data.result;
+          this.setState({result : this.result});
+        });
+      });     
+
+      
+    };   
 
   render() {
     const {
       fileName,
+      result,
     } = this.state;
 
     return (
@@ -70,8 +78,7 @@ export default class App extends Component {
             </div>
             <div className="col s12 push-7">
             <ShowXlsx
-              fileName={fileName}
-              onChange={this.getList}
+              result={result}
             ></ShowXlsx>              
             </div>
           </div>

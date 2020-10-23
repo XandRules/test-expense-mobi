@@ -1,25 +1,17 @@
 import React from 'react';
 
-import axios from 'axios';
+var resp = new Array();// [["Alexandre","Ribeiro","115.853.176-16"],["Alexandre","Ribeiro","115.853.176-16"]];
 
-function getList(fileName){
-  return axios.get(`http://localhost:3333/list/${fileName}`);
-}
-
-const ShowXlsx = ({fileName}) =>{
+const ShowXlsx = ({result}) =>{
   
-  let resp = {};
+  console.log('resultado ' , result)
 
-  getList(fileName).then(response =>{
-    console.log(response.data.result)
-
-    resp = response.data.result;
-
+  
+  resp.push(result);
     resp.map(i =>{
-      console.log(i[0], i[1], i[2]);
+      console.log(i)
     })
-
-  });
+    
 
   return (
     <div className="uk-container">
@@ -32,13 +24,15 @@ const ShowXlsx = ({fileName}) =>{
               </tr>
           </thead>
           <tbody>
-            {/* {resp.map(i =>{ */}
-             <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+           
+             {resp.map(i =>{
+               return <tr>
+                <td>{i[0]}</td>
+                <td>{i[1]}</td>
+                <td>{i[2]}</td>
               </tr>
-            {/* })} */}
+             })}           
+          
           </tbody>
       </table>
     </div>
